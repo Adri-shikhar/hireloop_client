@@ -1,9 +1,11 @@
-import Image from "next/image";
+import HeroSection from "@/components/home/HeroSection";
+import StatsSection from "@/components/home/StatsSection";
 
 export default function Home() {
   return (
-   <>
-   <h1>Hello World</h1>
-   </>
+    <main className="relative min-h-screen overflow-hidden">
+      <HeroSection />
+      <StatsSection />
+    </main>
   );
 }
