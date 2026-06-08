@@ -1,32 +1,22 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
 });
 
 export const metadata = {
   title: "HireLoop — Find Your Dream Job Today",
-  description:
-    "HireLoop connects top talent with world-class companies. Browse thousands of curated opportunities and land your next role — faster.",
+  description: "HireLoop connects top talent with world-class companies.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-[#050508] text-white">
+    <html lang="en">
+      <body className={inter.className}>
         <Navbar />
-        <div className="flex-1">{children}</div>
+        {children}
       </body>
     </html>
   );

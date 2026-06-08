@@ -1,64 +1,52 @@
 import Link from "next/link";
-import PageShell from "@/components/PageShell";
 
 export const metadata = {
   title: "Get Started | HireLoop",
-  description: "Create your HireLoop account and start your job search.",
 };
 
 export default function SignUpPage() {
   return (
-    <PageShell
-      title="Get Started"
-      description="Create your free account and join thousands of job seekers and recruiters on HireLoop."
-    >
-      <form className="hireloop-stat-card mx-auto max-w-md space-y-5 rounded-2xl p-8">
-        <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-gray-300">
-            Full Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Jane Doe"
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none focus:border-indigo-500/50"
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-gray-300">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="you@example.com"
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none focus:border-indigo-500/50"
-          />
-        </div>
-        <div>
-          <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-gray-300">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-gray-500 outline-none focus:border-indigo-500/50"
-          />
-        </div>
-        <button
-          type="button"
-          className="hireloop-btn-primary w-full rounded-lg py-2.5 text-sm font-semibold text-white"
-        >
-          Create Account
-        </button>
-        <p className="text-center text-sm text-gray-500">
+    <div className="page">
+      <h1>Get Started</h1>
+      <p className="subtitle">Create your free HireLoop account.</p>
+
+      <div className="card form-box">
+        <form>
+          <div className="form-group">
+            <label htmlFor="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Your password"
+            />
+          </div>
+
+          <button type="button" className="btn-primary" style={{ width: "100%", border: "none", cursor: "pointer", padding: "12px" }}>
+            Create Account
+          </button>
+        </form>
+
+        <p className="form-link">
           Already have an account?{" "}
-          <Link href="/sign-in" className="text-indigo-400 hover:text-indigo-300">
-            Sign In
-          </Link>
+          <Link href="/sign-in">Sign In</Link>
         </p>
-      </form>
-    </PageShell>
+      </div>
+    </div>
   );
 }
