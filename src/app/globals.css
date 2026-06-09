@@ -114,6 +114,32 @@ img {
   gap: 24px;
 }
 
+.user-name {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-sign-out {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #d1d5db;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-sign-out:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.nav-loading {
+  color: #6b7280;
+  font-size: 14px;
+}
+
 .sign-in-link {
   color: #a5b4fc;
   font-size: 14px;
