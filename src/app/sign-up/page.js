@@ -2,7 +2,6 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-; 
 
 export default function SignUpPage() {
   
@@ -13,21 +12,22 @@ export default function SignUpPage() {
     const email = formData.get("email");
     const password = formData.get("password");
     
-    // --- MOVED THE AUTH LOGIC HERE ---
+    // 1. Get the role from the dropdown
+    const role = formData.get("role"); 
+    
     const { data, error } = await authClient.signUp.email({
       email,
       password,
       name,
+      role,  // 2. Pass the dynamic role to your database/auth client
     });
 
     if (error) {
       console.error("Sign up error:", error);
-      // Future: maybe show an error message on the screen using useState
     }
 
     if (data) {
       console.log("Success:", data);
-      // Future: redirect the user to the dashboard
     } else {
       console.log("Sign up failed");
     }
@@ -40,6 +40,32 @@ export default function SignUpPage() {
 
       <div className="card form-box">
         <form onSubmit={handleSubmit}>
+          
+          {/* 3. Updated Dropdown Menu Styling */}
+          <div className="form-group">
+            <label htmlFor="role">I am a</label>
+            <select 
+              id="role" 
+              name="role" 
+              required
+              style={{ 
+                width: "100%", 
+                padding: "10px", 
+                marginTop: "4px", 
+                marginBottom: "16px",
+                backgroundColor: "#f8fafc", /* Light slate/blue background */
+                color: "#1e293b",           /* Dark slate text */
+                border: "1px solid #cbd5e1", /* Subtle gray border */
+                borderRadius: "6px",        /* Rounded edges */
+                fontSize: "16px",           /* Readable text size */
+                cursor: "pointer"           /* Pointer cursor on hover */
+              }} 
+            >
+              <option value="seeker">Job Seeker</option>
+              <option value="recruiter">Recruiter</option>
+            </select>
+          </div>
+
           <div className="form-group">
             <label htmlFor="name">Full Name</label>
             <input 
