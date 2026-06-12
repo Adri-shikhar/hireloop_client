@@ -17,7 +17,7 @@ export async function createCompany(payload) {
 export async function getCompany(recruiterId) {
   try {
     const response = await fetch(
-      `http://localhost:5000/api/companies?recruiterId=${recruiterId}`,
+      `http://localhost:5000/api/my-companies?recruiterId=${recruiterId}`,
     );
     return await response.json();
   } catch (error) {

@@ -1,13 +1,49 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Briefcase, Plus } from "lucide-react";
+import { Briefcase, Plus, Eye, Pencil, Trash2 } from "lucide-react";
 import PageHeader from "@/components/ui/PageHeader";
 import DashboardEmptyState from "@/components/recruiter/DashboardEmptyState";
-import { getJobs } from "@/lib/actions/job";
+import { getMyJobs } from "@/lib/actions/job";
+import { UserInformation } from "@/components/users/user";
 
-export default async function JobsPage() {
-  const data = await getJobs();
-  const jobs = Array.isArray(data) ? data : [];
+export default function JobsPage() {
+  const user = UserInformation();
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (user.isLoading) return;
+
+    async function loadJobs() {
+      if (!user.user?.id) {
+        setJobs([]);
+        setLoading(false);
+        return;
+      }
+
+      const data = await getMyJobs(user.user.id);
+      setJobs(Array.isArray(data) ? data : []);
+      setLoading(false);
+    }
+
+    loadJobs();
+  }, [user.user?.id, user.isLoading]);
+
   const hasJobs = jobs.length > 0;
+
+  if (loading || user.isLoading) {
+    return (
+      <div>
+        <PageHeader
+          variant="recruiter"
+          title="Manage Jobs"
+          description="Loading your job listings..."
+        />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -43,7 +79,9 @@ export default async function JobsPage() {
             <table className="jobs-table">
               <thead>
                 <tr>
-                  {["Job", "Type", "Salary", "Location", "Deadline", "Status"].map(h => <th key={h}>{h}</th>)}
+                  {["Job", "Type", "Salary", "Location", "Deadline", "Status", ""].map((h, i) => (
+                    <th key={i}>{h}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -65,6 +103,31 @@ export default async function JobsPage() {
                       <td className="text-gray-500 text-sm">{job.deadline ? String(job.deadline) : "—"}</td>
                       <td>
                         <span className={`status-badge ${status}`}>{job.status || "active"}</span>
+                      </td>
+                      <td>
+                        <div className="flex items-center justify-end gap-3">
+                          <Link
+                            href={`/dashboard/recruiter/jobs/${job._id}`}
+                            className="text-gray-500 hover:text-white transition-colors"
+                            title="View Job"
+                          >
+                            <Eye size={16} />
+                          </Link>
+                          <Link
+                            href={`/dashboard/recruiter/jobs/${job._id}/edit`}
+                            className="text-gray-500 hover:text-white transition-colors"
+                            title="Edit Job"
+                          >
+                            <Pencil size={16} />
+                          </Link>
+                          <button
+                            type="button"
+                            className="text-gray-500 hover:text-red-500 transition-colors"
+                            title="Delete Job"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );

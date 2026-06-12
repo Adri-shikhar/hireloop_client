@@ -17,8 +17,10 @@ import {
 import { Globe } from "@gravity-ui/icons";
 import { createJob } from "@/lib/actions/job";
 import { useRouter } from "next/navigation";
+import { UserInformation } from "@/components/users/user";
 
 export default function PostJobPage() {
+  const user = UserInformation();
   const [isRemote, setIsRemote] = useState(false);
   const [errors, setErrors] = useState({});
   const router = useRouter();
@@ -61,6 +63,7 @@ export default function PostJobPage() {
       isRemote,
       status: "active",
       isPubliclyVisible: true,
+      recruiterId: user.user?.id,
     };
 
     try {
