@@ -1,67 +1,43 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const STORAGE_KEY = "hireloop-theme";
 
 const ThemeContext = createContext({
   theme: "dark",
-  resolvedTheme: "dark",
-  setTheme: () => {},
   toggleTheme: () => {},
+  ready: false,
 });
 
-function getSystemTheme() {
-  if (typeof window === "undefined") return "dark";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
 function applyTheme(theme) {
-  const resolved = theme === "system" ? getSystemTheme() : theme;
-  document.documentElement.setAttribute("data-theme", resolved);
-  document.documentElement.style.colorScheme = resolved;
-  return resolved;
+  document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.style.colorScheme = theme;
 }
 
-export function ThemeProvider({ children, defaultTheme = "dark" }) {
-  const [theme, setThemeState] = useState(defaultTheme);
-  const [resolvedTheme, setResolvedTheme] = useState(defaultTheme);
-  const [mounted, setMounted] = useState(false);
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState("dark");
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    const initial = stored || defaultTheme;
-    setThemeState(initial);
-    setResolvedTheme(applyTheme(initial));
-    setMounted(true);
-  }, [defaultTheme]);
-
-  useEffect(() => {
-    if (!mounted) return;
-
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = () => {
-      if (theme === "system") {
-        setResolvedTheme(applyTheme("system"));
-      }
-    };
-
-    media.addEventListener("change", handleChange);
-    return () => media.removeEventListener("change", handleChange);
-  }, [theme, mounted]);
-
-  const setTheme = useCallback((next) => {
-    setThemeState(next);
-    localStorage.setItem(STORAGE_KEY, next);
-    setResolvedTheme(applyTheme(next));
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const initial = saved === "light" ? "light" : "dark";
+    setTheme(initial);
+    applyTheme(initial);
+    setReady(true);
   }, []);
 
-  const toggleTheme = useCallback(() => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-  }, [resolvedTheme, setTheme]);
+  const toggleTheme = () => {
+    setTheme((current) => {
+      const next = current === "dark" ? "light" : "dark";
+      localStorage.setItem(STORAGE_KEY, next);
+      applyTheme(next);
+      return next;
+    });
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme, mounted }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, ready }}>
       {children}
     </ThemeContext.Provider>
   );

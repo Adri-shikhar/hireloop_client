@@ -1,13 +1,10 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import { useSession } from "@/lib/auth-client";
 
 export default function ConditionalNavbar() {
-  const pathname = usePathname();
-  const isDashboard = pathname?.startsWith("/dashboard");
+  const { data: session } = useSession();
 
-  if (isDashboard) return null;
-
-  return <Navbar />;
+  return <Navbar key={session?.user?.id ?? "guest"} />;
 }

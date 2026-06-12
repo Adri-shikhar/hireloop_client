@@ -7,8 +7,11 @@ export default function PageHeader({ title, description, action, id, variant = "
   if (variant === "recruiter") {
     return (
       <header className="rd-page-header">
-        <h1 id={headingId}>{title}</h1>
-        {description && <p aria-describedby={headingId}>{description}</p>}
+        <div>
+          <h1 id={headingId}>{title}</h1>
+          {description && <p aria-describedby={headingId}>{description}</p>}
+        </div>
+        {action && <div>{action}</div>}
       </header>
     );
   }

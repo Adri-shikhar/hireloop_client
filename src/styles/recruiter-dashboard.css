@@ -18,7 +18,8 @@
 /* ===== SHELL ===== */
 .rd-shell {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--navbar-height, 63px));
+  padding-top: var(--navbar-height, 63px);
   background: var(--rd-bg);
   color: var(--rd-text);
 }
@@ -26,7 +27,10 @@
 .rd-sidebar-overlay {
   display: none;
   position: fixed;
-  inset: 0;
+  top: var(--navbar-height, 63px);
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: rgba(0, 0, 0, 0.75);
   z-index: 40;
 }
@@ -37,7 +41,7 @@
 
 .rd-sidebar-wrap {
   position: fixed;
-  top: 0;
+  top: var(--navbar-height, 63px);
   left: 0;
   bottom: 0;
   width: 272px;
@@ -607,6 +611,377 @@
   background: #e4e4e7;
 }
 
+/* ===== COMPANY PROFILE ===== */
+.rd-company-shell {
+  max-width: 880px;
+}
+
+.rd-company-view {
+  padding: 32px;
+}
+
+.rd-company-view-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 28px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--rd-border-subtle);
+}
+
+.rd-company-identity {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.rd-company-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  object-fit: contain;
+  background: linear-gradient(145deg, #1a1a1c, #141416);
+  border: 1px solid var(--rd-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.rd-company-logo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rd-text-muted);
+}
+
+.rd-company-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--rd-text);
+  margin-bottom: 8px;
+}
+
+.rd-status-badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid;
+  text-transform: capitalize;
+}
+
+.rd-status-badge.pending {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+.rd-status-badge.approved {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.2);
+}
+
+.rd-status-badge.rejected {
+  color: #fb7185;
+  background: rgba(251, 113, 133, 0.1);
+  border-color: rgba(251, 113, 133, 0.2);
+}
+
+.rd-company-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rd-company-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: var(--rd-text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.rd-company-link:hover {
+  color: var(--rd-text-secondary);
+}
+
+.rd-company-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.rd-company-meta-item {
+  padding: 18px;
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(28, 28, 30, 0.9), rgba(18, 18, 20, 0.6));
+  border: 1px solid var(--rd-border-subtle);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.rd-company-meta-item:hover {
+  border-color: var(--rd-border);
+  transform: translateY(-1px);
+}
+
+.rd-company-meta-item span {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rd-text-muted);
+  margin-bottom: 8px;
+}
+
+.rd-company-meta-item strong {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--rd-text);
+  text-transform: capitalize;
+}
+
+.rd-company-about h3 {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rd-text-muted);
+  margin-bottom: 12px;
+}
+
+.rd-company-about p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--rd-text-secondary);
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(28, 28, 30, 0.45);
+  border: 1px solid var(--rd-border-subtle);
+  white-space: pre-wrap;
+}
+
+.rd-company-form-wrap {
+  padding: 32px;
+}
+
+.rd-company-form-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--rd-text);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--rd-border-subtle);
+}
+
+.rd-company-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  grid-column: 1 / -1;
+  padding-top: 20px;
+  margin-top: 4px;
+  border-top: 1px solid var(--rd-border-subtle);
+}
+
+.rd-field-error {
+  font-size: 0.75rem;
+  color: #f87171;
+  margin-top: 6px;
+}
+
+.rd-select-trigger {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background: var(--rd-surface-input);
+  border: 1px solid var(--rd-border-subtle);
+  border-radius: 8px;
+  color: var(--rd-text);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.rd-select-trigger:hover,
+.rd-select-trigger[data-focused="true"] {
+  background: var(--rd-surface-input-hover);
+  border-color: #3f3f46;
+}
+
+.rd-select-popover {
+  background: var(--rd-surface-input);
+  border: 1px solid var(--rd-border);
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.rd-select-item {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: var(--rd-text-secondary);
+  cursor: pointer;
+  outline: none;
+}
+
+.rd-select-item[data-focused="true"],
+.rd-select-item:hover {
+  background: var(--rd-nav-hover);
+  color: var(--rd-text);
+}
+
+.rd-company-logo-field label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--rd-text-secondary);
+  margin-bottom: 8px;
+}
+
+.rd-company-logo-upload {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rd-company-logo-drop {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  border: 1px dashed var(--rd-border);
+  background: rgba(28, 28, 30, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.rd-company-logo-drop:hover {
+  border-color: #52525b;
+  background: rgba(36, 36, 38, 0.8);
+}
+
+.rd-company-logo-drop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rd-company-logo-drop svg {
+  color: var(--rd-text-muted);
+}
+
+.rd-company-logo-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--rd-text);
+}
+
+.rd-company-logo-hint {
+  font-size: 0.75rem;
+  color: var(--rd-text-muted);
+  margin-top: 2px;
+}
+
+.rd-btn-outline {
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid var(--rd-border);
+  background: transparent;
+  color: var(--rd-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.rd-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--rd-text);
+}
+
+.rd-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rd-page-header .rd-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .rd-company-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== JOBS LIST ===== */
+.rd-jobs-panel {
+  background: var(--rd-surface);
+  border: 1px solid var(--rd-border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rd-jobs-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--rd-border-subtle);
+}
+
+.rd-jobs-panel-header h2 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--rd-text);
+}
+
+.rd-jobs-panel-header span {
+  font-size: 0.75rem;
+  color: var(--rd-text-muted);
+}
+
+.rd-job-cell-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rd-job-cell-title span:first-child {
+  font-weight: 500;
+  color: var(--rd-text);
+}
+
+.rd-job-cell-title span:last-child {
+  font-size: 0.75rem;
+  color: var(--rd-text-muted);
+}
+
 @media (min-width: 1024px) {
   .rd-shell {
     flex-direction: row;
@@ -614,9 +989,10 @@
 
   .rd-sidebar-wrap {
     position: relative;
+    top: auto;
     transform: none;
     flex-shrink: 0;
-    height: 100vh;
+    height: calc(100vh - var(--navbar-height, 63px));
   }
 
   .rd-sidebar-overlay {

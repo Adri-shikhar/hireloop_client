@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import {
   Form,
@@ -15,18 +14,11 @@ import {
   Button,
   toast,
 } from "@heroui/react";
-import { Briefcase, Globe } from "@gravity-ui/icons";
+import { Globe } from "@gravity-ui/icons";
 import { createJob } from "@/lib/actions/job";
 import { useRouter } from "next/navigation";
 
 export default function PostJobPage() {
-  // Mock configuration for recruiter's authenticated state
-  const [mockCompany] = useState({
-    name: "Acme Corp (Auto-filled)",
-    id: "company_123",
-    isApproved: true,
-  });
-
   const [isRemote, setIsRemote] = useState(false);
   const [errors, setErrors] = useState({});
   const router = useRouter();
@@ -34,13 +26,7 @@ export default function PostJobPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 1. Guard check for company approval
-    if (!mockCompany.isApproved) {
-      alert("Your company profile must be approved before you can post jobs.");
-      return;
-    }
-
-    // 2. Gather form data & transform to object
+    // Gather form data & transform to object
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
@@ -58,9 +44,9 @@ export default function PostJobPage() {
       newErrors.responsibilities = "Responsibilities are required";
     if (!data.requirements)
       newErrors.requirements = "Requirements are required";
-    
+
     console.log("Validation errors:", newErrors);
-    
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -73,7 +59,6 @@ export default function PostJobPage() {
     const payload = {
       ...data,
       isRemote,
-      companyId: mockCompany.id,
       status: "active",
       isPubliclyVisible: true,
     };
@@ -88,7 +73,7 @@ export default function PostJobPage() {
         toast.success("Job posted successfully!");
         e.target.reset();
         setIsRemote(false);
-        
+
         // Client-side redirection handling
         router.push("/dashboard/recruiter/jobs");
       } else {
@@ -125,18 +110,6 @@ export default function PostJobPage() {
           <p className="text-zinc-400 text-sm mt-1">
             Fill out the details below to publish your open position.
           </p>
-
-          {/* Company verification status panel */}
-          <div className="mt-4 inline-flex items-center gap-2 bg-zinc-900/50 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-zinc-400">
-            <Briefcase size={14} className="text-zinc-500" />
-            Posting as:{" "}
-            <span className="font-semibold text-zinc-300">
-              {mockCompany.name}
-            </span>
-            <span className="text-emerald-500 font-medium bg-emerald-950/30 px-1.5 py-0.5 rounded border border-emerald-900/50">
-              Approved
-            </span>
-          </div>
         </div>
 
         {/* Hero UI Main Form Handler */}

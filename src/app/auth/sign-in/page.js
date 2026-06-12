@@ -24,21 +24,18 @@ export default function SignInPage() {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      redirectTo: "/", // This might auto-redirect depending on your auth setup
     });
 
     if (error) {
       console.error(error);
-      // 3. Display the error to the user
       setErrorMessage(error.message || "Failed to sign in. Please check your credentials.");
-      setIsPending(false); // Re-enable the button
-      return; 
+      setIsPending(false);
+      return;
     }
 
     if (data) {
-      console.log(data);
-      // If your auth library doesn't auto-redirect, do it manually:
-      router.push("/"); 
+      router.push("/");
+      router.refresh();
     }
   };
 
@@ -91,7 +88,7 @@ export default function SignInPage() {
               opacity: isPending ? 0.7 : 1,
             }}
           >
-            {isPending ? "Signing In..." : "Sign In"}
+            {isPending ? "Logging in..." : "Sign In"}
           </button>
         </form>
 

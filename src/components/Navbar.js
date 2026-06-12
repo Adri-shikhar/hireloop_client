@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import logo from "@/Assets/images/logo.png";
 import { authClient, useSession } from "@/lib/auth-client";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const Navbar = () => {
+  const router = useRouter();
   const { data: session, isPending } = useSession();
   const [isSigningOut, setIsSigningOut] = useState(false);
 
@@ -14,8 +16,11 @@ const Navbar = () => {
     setIsSigningOut(true);
     try {
       await authClient.signOut();
+      router.push("/");
+      router.refresh();
     } catch (error) {
       console.error("Failed to sign out:", error);
+    } finally {
       setIsSigningOut(false);
     }
   };

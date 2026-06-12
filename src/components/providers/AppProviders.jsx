@@ -7,5 +7,5 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
  * Wraps theme context and future global providers (toasts, etc.).
  */
 export default function AppProviders({ children }) {
-  return <ThemeProvider defaultTheme="dark">{children}</ThemeProvider>;
+  return <ThemeProvider>{children}</ThemeProvider>;
 }

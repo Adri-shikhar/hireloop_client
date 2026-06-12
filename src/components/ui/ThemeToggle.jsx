@@ -4,14 +4,10 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/lib/utils/cn";
 
-/**
- * Accessible dark/light mode toggle with keyboard support.
- * Uses aria-pressed and visible focus ring per WCAG 2.2.
- */
 export default function ThemeToggle({ className, size = "md" }) {
-  const { resolvedTheme, toggleTheme, mounted } = useTheme();
+  const { theme, toggleTheme, ready } = useTheme();
 
-  if (!mounted) {
+  if (!ready) {
     return (
       <div
         className={cn("theme-toggle skeleton-pulse", size === "sm" && "theme-toggle-sm", className)}
@@ -20,17 +16,13 @@ export default function ThemeToggle({ className, size = "md" }) {
     );
   }
 
-  const isDark = resolvedTheme === "dark";
+  const isDark = theme === "dark";
 
   return (
     <button
       type="button"
       onClick={toggleTheme}
-      className={cn(
-        "theme-toggle",
-        size === "sm" && "theme-toggle-sm",
-        className
-      )}
+      className={cn("theme-toggle", size === "sm" && "theme-toggle-sm", className)}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={isDark}
       title={isDark ? "Light mode" : "Dark mode"}

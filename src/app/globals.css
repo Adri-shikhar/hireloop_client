@@ -139,6 +139,10 @@ img {
 }
 
 /* ===== NAVBAR ===== */
+:root {
+  --navbar-height: 63px;
+}
+
 .navbar {
   position: fixed;
   top: 0;

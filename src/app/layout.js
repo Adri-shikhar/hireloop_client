@@ -1,7 +1,6 @@
 import { Inter } from "next/font/google";
 import ConditionalNavbar from "@/components/ConditionalNavbar";
 import AppProviders from "@/components/providers/AppProviders";
-import ThemeScript from "@/components/providers/ThemeScript";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,10 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <ThemeScript />
-      </head>
+    <html lang="en" data-theme="dark" suppressHydrationWarning>
       <body className={inter.className}>
         <AppProviders>
           <ConditionalNavbar />
