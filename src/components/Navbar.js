@@ -1,26 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react"; // 1. Import useState
+import { useState } from "react";
 import logo from "@/Assets/images/logo.png";
 import { authClient, useSession } from "@/lib/auth-client";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
-export default function Navbar() {
+const Navbar = () => {
   const { data: session, isPending } = useSession();
-  
-  // 2. Add state to track the sign-out process
   const [isSigningOut, setIsSigningOut] = useState(false);
 
   const handleSignOut = async () => {
-    setIsSigningOut(true); // 3. Start the loading state
-    
+    setIsSigningOut(true);
     try {
       await authClient.signOut();
-      // Note: We don't necessarily set isSigningOut back to false here 
-      // because usually signing out redirects the user or refreshes the page!
     } catch (error) {
       console.error("Failed to sign out:", error);
-      setIsSigningOut(false); // Only reset if there was an error
+      setIsSigningOut(false);
     }
   };
 
@@ -41,6 +37,7 @@ export default function Navbar() {
           <span className="nav-divider"></span>
 
           <div className="navbar-actions">
+            <ThemeToggle size="sm" />
             {isPending ? (
               <span className="nav-loading">...</span>
             ) : session?.user ? (
@@ -48,33 +45,21 @@ export default function Navbar() {
                 <span className="user-name">
                   {session.user.name || session.user.email}
                 </span>
-                
-                {/* 4. Updated Sign Out Button */}
                 <button
                   type="button"
                   onClick={handleSignOut}
                   className="btn-sign-out"
-                  disabled={isSigningOut} // Prevent double-clicking
-                  style={{
-                    backgroundColor: "#e53e3e", // A nice standard red
-                    color: "white",
-                    border: "none",
-                    padding: "8px 16px",
-                    borderRadius: "4px",
-                    cursor: isSigningOut ? "not-allowed" : "pointer",
-                    opacity: isSigningOut ? 0.7 : 1,
-                    transition: "all 0.2s ease"
-                  }}
+                  disabled={isSigningOut}
                 >
                   {isSigningOut ? "Signing out..." : "Sign Out"}
                 </button>
               </>
             ) : (
               <>
-                <Link href="/sign-in" className="sign-in-link">
+                <Link href="/auth/sign-in" className="sign-in-link">
                   Sign In
                 </Link>
-                <Link href="/sign-up" className="btn-primary">
+                <Link href="/auth/sign-up" className="btn-primary">
                   Get Started
                 </Link>
               </>
@@ -84,4 +69,6 @@ export default function Navbar() {
       </div>
     </header>
   );
-}
+};
+
+export default Navbar;

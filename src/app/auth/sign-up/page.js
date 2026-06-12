@@ -44,23 +44,7 @@ export default function SignUpPage() {
           {/* 3. Updated Dropdown Menu Styling */}
           <div className="form-group">
             <label htmlFor="role">I am a</label>
-            <select 
-              id="role" 
-              name="role" 
-              required
-              style={{ 
-                width: "100%", 
-                padding: "10px", 
-                marginTop: "4px", 
-                marginBottom: "16px",
-                backgroundColor: "#f8fafc", /* Light slate/blue background */
-                color: "#1e293b",           /* Dark slate text */
-                border: "1px solid #cbd5e1", /* Subtle gray border */
-                borderRadius: "6px",        /* Rounded edges */
-                fontSize: "16px",           /* Readable text size */
-                cursor: "pointer"           /* Pointer cursor on hover */
-              }} 
-            >
+            <select id="role" name="role" required className="form-select">
               <option value="seeker">Job Seeker</option>
               <option value="recruiter">Recruiter</option>
             </select>
@@ -110,7 +94,7 @@ export default function SignUpPage() {
 
         <p className="form-link">
           Already have an account?{" "}
-          <Link href="/sign-in">Sign In</Link>
+          <Link href="/auth/sign-in">Sign In</Link>
         </p>
       </div>
     </div>

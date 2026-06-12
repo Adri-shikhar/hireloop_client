@@ -1,9 +1,13 @@
 import { Inter } from "next/font/google";
-import Navbar from "@/components/Navbar";
+import ConditionalNavbar from "@/components/ConditionalNavbar";
+import AppProviders from "@/components/providers/AppProviders";
+import ThemeScript from "@/components/providers/ThemeScript";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata = {
@@ -13,10 +17,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <AppProviders>
+          <ConditionalNavbar />
+          {children}
+        </AppProviders>
       </body>
     </html>
   );
