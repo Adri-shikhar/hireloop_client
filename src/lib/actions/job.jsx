@@ -1,44 +1,43 @@
+import { API, parseJson } from "@/lib/api";
+
 export async function createJob(payload) {
   try {
-    const response = await fetch("http://localhost:5000/api/jobs", {
+    const response = await fetch(`${API}/api/jobs`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Server raw error response:", errorText);
+      console.error("Server error:", await response.text());
       return { error: "Server returned error status" };
     }
 
-    return await response.json();
+    return await parseJson(response);
   } catch (error) {
-    console.error("Fetch implementation failed:", error);
+    console.error("Fetch failed:", error);
     return null;
   }
 }
 
 export async function getJobs() {
   try {
-    const response = await fetch("http://localhost:5000/api/jobs");
-    return await response.json();
+    const response = await fetch(`${API}/api/jobs`);
+    const data = await parseJson(response);
+    return Array.isArray(data) ? data : [];
   } catch (error) {
-    console.error("Fetch implementation failed:", error);
-    return null;
+    console.error("Fetch failed:", error);
+    return [];
   }
 }
 
 export async function getMyJobs(recruiterId) {
   try {
-    const response = await fetch(
-      `http://localhost:5000/api/my-jobs?recruiterId=${recruiterId}`,
-    );
-    return await response.json();
+    const response = await fetch(`${API}/api/my-jobs?recruiterId=${recruiterId}`);
+    const data = await parseJson(response);
+    return Array.isArray(data) ? data : [];
   } catch (error) {
-    console.error("Fetch implementation failed:", error);
-    return null;
+    console.error("Fetch failed:", error);
+    return [];
   }
 }
