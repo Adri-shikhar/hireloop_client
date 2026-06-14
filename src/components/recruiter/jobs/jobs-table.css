@@ -1,0 +1,41 @@
+.rd-jobs-panel {
+  background: var(--rd-surface);
+  border: 1px solid var(--rd-border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.rd-jobs-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--rd-border-subtle);
+}
+
+.rd-jobs-panel-header h2 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--rd-text);
+}
+
+.rd-jobs-panel-header span {
+  font-size: 0.75rem;
+  color: var(--rd-text-muted);
+}
+
+.rd-job-cell-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rd-job-cell-title span:first-child {
+  font-weight: 500;
+  color: var(--rd-text);
+}
+
+.rd-job-cell-title span:last-child {
+  font-size: 0.75rem;
+  color: var(--rd-text-muted);
+}

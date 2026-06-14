@@ -1,0 +1,16 @@
+/* Recruiter dashboard design tokens — scoped to dashboard layout */
+.rd-shell {
+  --rd-bg: #050505;
+  --rd-sidebar: #0a0a0a;
+  --rd-sidebar-border: #1e1e1e;
+  --rd-nav-active: #1a1a1a;
+  --rd-nav-hover: #111111;
+  --rd-text: #ffffff;
+  --rd-text-muted: #71717a;
+  --rd-text-secondary: #a1a1aa;
+  --rd-surface: #121214;
+  --rd-surface-input: #1c1c1e;
+  --rd-surface-input-hover: #242426;
+  --rd-border: #27272a;
+  --rd-border-subtle: #1c1c1e;
+}

@@ -1,0 +1,29 @@
+.rd-page-header {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rd-page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--rd-text);
+  margin-bottom: 6px;
+}
+
+.rd-page-header p {
+  font-size: 0.875rem;
+  color: var(--rd-text-muted);
+  line-height: 1.5;
+}
+
+.rd-page-header .rd-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}

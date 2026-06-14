@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import ConditionalNavbar from "@/components/ConditionalNavbar";
+import ConditionalFooter from "@/components/ConditionalFooter";
 import AppProviders from "@/components/providers/AppProviders";
 import "./globals.css";
 
@@ -20,7 +21,8 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <AppProviders>
           <ConditionalNavbar />
-          {children}
+          <div className="site-main">{children}</div>
+          <ConditionalFooter />
         </AppProviders>
       </body>
     </html>

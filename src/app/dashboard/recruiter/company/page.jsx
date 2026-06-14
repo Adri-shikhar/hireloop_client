@@ -1,7 +1,10 @@
-"use client";
+import CompanyProfile from "./CompanyProfile";
+import { getUserSession } from "@/lib/core/session";
+import { getRecruiterCompany } from "@/lib/api/companies";
 
-import CompanyProfile from "@/components/recruiter/CompanyProfile";
+export default async function MyCompanyPage() {
+  const recruiter = await getUserSession();
+  const company = recruiter?.id ? await getRecruiterCompany(recruiter.id) : null;
 
-export default function MyCompanyPage() {
-  return <CompanyProfile />;
+  return <CompanyProfile recruiter={recruiter} recruiterCompany={company} />;
 }

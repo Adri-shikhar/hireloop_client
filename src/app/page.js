@@ -1,5 +1,6 @@
 import Link from "next/link";
 import globeImg from "@/Assets/images/globe.png";
+import FeaturedJobs from "@/components/home/FeaturedJobs";
 
 export default function Home() {
   return (
@@ -62,6 +63,8 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <FeaturedJobs />
 
       {/* Stats */}
       <section className="stats">

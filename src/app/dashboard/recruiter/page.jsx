@@ -1,4 +1,4 @@
-import RecruiterAnalyticsDashboard from "@/components/dashboard/RecruiterAnalyticsDashboard";
+import RecruiterAnalyticsDashboard from "@/components/recruiter/dashboard/AnalyticsDashboard";
 
 export const metadata = {
   title: "Dashboard | HireLoop Recruiter",

@@ -3,10 +3,10 @@
 import { useState } from "react";
 import RecruiterPageHeader from "@/components/recruiter/shared/RecruiterPageHeader";
 
-export default function SettingsPage() {
+export default function SeekerSettingsPage() {
   const [notifications, setNotifications] = useState({
     applications: true,
-    jobViews: true,
+    jobAlerts: true,
     weeklyDigest: false,
   });
 
@@ -18,7 +18,7 @@ export default function SettingsPage() {
     <div>
       <RecruiterPageHeader
         title="Settings"
-        description="Manage your account preferences and notification settings."
+        description="Manage your seeker account preferences."
       />
 
       <div className="dash-panel" style={{ maxWidth: 640 }}>
@@ -29,8 +29,8 @@ export default function SettingsPage() {
           <div className="settings-section">
             <div className="settings-row">
               <div>
-                <h3>New applications</h3>
-                <p>Get notified when someone applies to your jobs</p>
+                <h3>Application updates</h3>
+                <p>Get notified when your application status changes</p>
               </div>
               <button
                 type="button"
@@ -49,20 +49,20 @@ export default function SettingsPage() {
             </div>
             <div className="settings-row">
               <div>
-                <h3>Job view milestones</h3>
-                <p>Alerts when your listings reach view milestones</p>
+                <h3>Job alerts</h3>
+                <p>New roles matching your saved preferences</p>
               </div>
               <button
                 type="button"
-                onClick={() => toggle("jobViews")}
+                onClick={() => toggle("jobAlerts")}
                 className={`w-11 h-6 rounded-full transition-colors relative ${
-                  notifications.jobViews ? "bg-indigo-500" : "bg-zinc-700"
+                  notifications.jobAlerts ? "bg-indigo-500" : "bg-zinc-700"
                 }`}
-                aria-pressed={notifications.jobViews}
+                aria-pressed={notifications.jobAlerts}
               >
                 <span
                   className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-transform ${
-                    notifications.jobViews ? "left-[22px]" : "left-0.5"
+                    notifications.jobAlerts ? "left-[22px]" : "left-0.5"
                   }`}
                 />
               </button>
@@ -87,32 +87,6 @@ export default function SettingsPage() {
                 />
               </button>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="dash-panel mt-4" style={{ maxWidth: 640 }}>
-        <div className="dash-panel-header">
-          <h2>Account</h2>
-        </div>
-        <div className="dash-panel-body">
-          <div className="settings-row">
-            <div>
-              <h3>Email address</h3>
-              <p>Update your login email</p>
-            </div>
-            <button type="button" className="btn-dash-secondary">
-              Change
-            </button>
-          </div>
-          <div className="settings-row">
-            <div>
-              <h3>Password</h3>
-              <p>Change your account password</p>
-            </div>
-            <button type="button" className="btn-dash-secondary">
-              Update
-            </button>
           </div>
         </div>
       </div>
